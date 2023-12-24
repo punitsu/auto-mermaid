@@ -4,4 +4,6 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
+  coverageDirectory: './coverage',
+  watchPathIgnorePatterns: ['<rootDir>/node_modules/'],
 };
