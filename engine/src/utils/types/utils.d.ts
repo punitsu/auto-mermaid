@@ -3,4 +3,6 @@ export type ParseInputValuesInput = {
   connectionString: string;
   schema: [string];
   tables: [string];
+  allTables: boolean;
+  allSchemas: boolean;
 };

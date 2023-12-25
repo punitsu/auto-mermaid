@@ -13,9 +13,11 @@ export type PGClient = {
   disconnect: () => Promise<void>;
 };
 
-export type fetchDatabaseSchemaInput = {
-  database_name: string;
-  connection_string: string;
-  tables_included: string[] | string;
-  schema_included: string[] | string;
+export type FetchDatabaseSchemaInput = {
+  database: string;
+  connectionString: string;
+  schema: [string];
+  tables: [string];
+  allTables: boolean;
+  allSchemas: boolean;
 };

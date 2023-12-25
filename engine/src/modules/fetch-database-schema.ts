@@ -1,5 +1,7 @@
-import { fetchDatabaseSchemaInput } from '../utils/types/libs';
+import { FetchDatabaseSchemaInput } from '@utils/types/libs';
+import { parseInputValues } from '@utils/helper';
 
-export async function fetchDatabaseSchema({ database_name, connection_string, tables_included, schema_included }: fetchDatabaseSchemaInput) {
-  console.log('fetchDatabaseSchema', { database_name, connection_string, tables_included, schema_included });
+export async function fetchDatabaseSchema(input: FetchDatabaseSchemaInput) {
+  const { database_name, connection_string, custom_schema, has_custom_schema, has_custom_tables, custom_tables } = parseInputValues(input);
+  console.log(database_name, connection_string, custom_schema, has_custom_schema, has_custom_tables, custom_tables);
 }
