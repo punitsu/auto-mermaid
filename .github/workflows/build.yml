@@ -1,8 +1,9 @@
 name: 'build'
 on:
-  pull_request:
+  push:
     branches:
       - main
+      - develop
 jobs:
   coverage:
     runs-on: ubuntu-latest
