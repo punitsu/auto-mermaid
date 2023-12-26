@@ -2,6 +2,7 @@
 
 // Libs
 import * as fs from 'fs';
+require('module-alias/register');
 import { Command, Option } from 'commander';
 
 // Modules
@@ -20,12 +21,19 @@ const application_version = JSON.parse(fs.readFileSync('./package.json', 'utf8')
     .version(application_version, '-v, --version', 'Output the current version');
 
   program
+    .option('--debug', 'show debug information', false)
     .addOption(new Option('-d, --database <database name>', 'Database name').choices(DATABASES_SUPPORTED).makeOptionMandatory(true))
     .requiredOption('-c, --connection-string <value>', 'Connection string for the database')
     .option('-as, --all-schemas <Boolean>', 'Takes all schema', true)
     .option('-at, --all-tables <Boolean>', 'Takes all tables', true)
     .option('-s, --schema [schemas...]', 'Takes a list of schemas')
-    .option('-t, --table [tables...]', 'Takes a list of tables in the format "schema_name.table_name"');
+    .option('-t, --table [tables...]', 'Takes a list of tables in the format "schema_name.table_name"')
+    .option('--no-fk <Boolean>', 'Omit FK relations in column description', false)
+    .option('--no-default-values <Boolean>', 'Omit default values in column description', false)
+    .option('--no-nullable <Boolean>', 'Omit nullable in column description', false)
+    .option('--no-indexes <Boolean>', 'Omit indexes in column description', false)
+    .option('--no-enum-values <Boolean>', 'Omit enum values in column description', false)
+    .option('-o, --output <output file>', 'Output file name with file path', 'output.mmd');
 
   program.parse(process.argv);
 

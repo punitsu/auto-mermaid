@@ -9,6 +9,12 @@
     "lint": "eslint src/**/*.ts --fix",
     "start": "nodemon --watch \"*.ts\"  --watch \"*.json\" --exec \"ts-node\" ./engine/src/index.ts"
   },
+  "_moduleAliases": {
+    "@"      : "./engine/src",
+    "@modules"      : "./engine/src/modules",
+    "@utils" : "./engine/src/utils",
+    "@libs"  : "./engine/src/libs"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/punitsu/auto-mermaid.git"
@@ -26,7 +32,6 @@
   },
   "homepage": "https://github.com/punitsu/auto-mermaid#readme",
   "dependencies": {
-    "alias-hq": "^6.2.3",
     "commander": "^11.1.0",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.3",

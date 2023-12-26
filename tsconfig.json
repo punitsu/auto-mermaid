@@ -28,12 +28,12 @@
     "module": "node16",                                /* Specify what module code is generated. */
     // "rootDir": "./",                                  /* Specify the root folder within your source files. */
      "moduleResolution": "node10",                     /* Specify how TypeScript looks up a file from a given module specifier. */
-     "baseUrl": "./engine",                                  /* Specify the base directory to resolve non-relative module names. */
+     "baseUrl": "./engine/src",                                  /* Specify the base directory to resolve non-relative module names. */
      "paths": {
-        "@/*": ["./src/*"],
-        "@modules/*": ["./src/modules/*"],
-        "@utils/*": ["./src/utils/*"],
-        "@libs/*": ["./src/libs/*"],
+        "@/*": ["./*"],
+        "@modules/*": ["./modules/*"],
+        "@utils/*": ["./utils/*"],
+        "@libs/*": ["./libs/*"],
      },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
 //     "typeRoots": [
