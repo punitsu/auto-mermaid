@@ -9,9 +9,10 @@ import { Command, Option } from 'commander';
 import { fetchDatabaseSchema } from '@modules/fetch-database-schema';
 
 // Utilities
-import { DATABASES_SUPPORTED } from '@utils/constants';
+import { DATABASES_SUPPORTED } from '@utils/types/utils';
 
 const program = new Command();
+export const database_choices: DATABASES_SUPPORTED[] = ['postgres', 'mysql', 'sqlite'];
 const application_version = JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
 
 (async function startApplication() {
@@ -22,7 +23,7 @@ const application_version = JSON.parse(fs.readFileSync('./package.json', 'utf8')
 
   program
     .option('--debug', 'show debug information', false)
-    .addOption(new Option('-d, --database <database name>', 'Database name').choices(DATABASES_SUPPORTED).makeOptionMandatory(true))
+    .addOption(new Option('-d, --database <database name>', 'Database name').choices(database_choices).makeOptionMandatory(true))
     .requiredOption('-c, --connection-string <value>', 'Connection string for the database')
     .option('-as, --all-schemas <Boolean>', 'Takes all schema', true)
     .option('-at, --all-tables <Boolean>', 'Takes all tables', true)

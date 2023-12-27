@@ -1,23 +1,48 @@
 import { Client } from 'pg';
+import { DATABASES_SUPPORTED } from '@utils/constants';
 
-export type PGClientProps = {
+export interface PGClientProps {
   user?: string;
   password?: string;
   host?: string;
   database?: string;
-};
+  port?: number;
+}
 
-export type PGClient = {
+export interface PGClient {
   client: Client;
   connect: () => Promise<void>;
   disconnect: () => Promise<void>;
-};
+}
 
-export type FetchDatabaseSchemaInput = {
-  database: string;
-  connectionString: string;
-  schema: [string];
-  tables: [string];
-  allTables: boolean;
+export interface FetchDatabaseSchemaInput {
+  debug: boolean;
   allSchemas: boolean;
-};
+  allTables: boolean;
+  fk: boolean;
+  defaultValues: boolean;
+  nullable: boolean;
+  indexes: boolean;
+  enumValues: boolean;
+  output: string;
+  database: DATABASES_SUPPORTED;
+  connectionString: string;
+  schema?: [string];
+  tables?: [string];
+}
+
+export interface FetchPostgresSchemaInput {
+  debug: boolean;
+  database_name: DATABASES_SUPPORTED;
+  connection_string: any;
+  has_custom_schema: boolean;
+  has_custom_tables: boolean;
+  custom_schema: [string] | undefined;
+  custom_tables: [string] | undefined;
+  exclude_foreign_keys: boolean;
+  exclude_default_values: boolean;
+  exclude_nullable: boolean;
+  exclude_indexes: boolean;
+  exclude_enum_values: boolean;
+  output_file_name: string;
+}
