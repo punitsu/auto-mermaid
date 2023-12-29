@@ -1,5 +1,6 @@
 import { DATABASES_SUPPORTED, ParseInputValuesInput } from '@utils/types';
 import { DATABASE_URL_REGEX } from '@utils/constants';
+import { logger } from '@utils/wrappers';
 
 export function parseInputValues(input: ParseInputValuesInput) {
   return {
@@ -20,6 +21,7 @@ export function parseInputValues(input: ParseInputValuesInput) {
 }
 
 export function parseDatabaseUrl(url: string, database_name: DATABASES_SUPPORTED) {
+  logger.info(`Parsing connection string for ${database_name}`);
   const regex = DATABASE_URL_REGEX[database_name];
   const match = url.match(regex);
   if (!match) {

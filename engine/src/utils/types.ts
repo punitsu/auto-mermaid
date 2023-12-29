@@ -1,11 +1,15 @@
+export interface ProcessEnv {
+  [DEBUG_LEVEL: string]: number | 0;
+}
+
 export type DATABASES_SUPPORTED = 'postgres' | 'mysql' | 'sqlite';
 
 export interface PGClientProps {
-  user?: string;
-  password?: string;
-  host?: string;
-  database?: string;
-  port?: number;
+  user: string;
+  password: string;
+  host: string;
+  database: string;
+  port: number;
 }
 
 export interface FetchDatabaseSchemaInput {

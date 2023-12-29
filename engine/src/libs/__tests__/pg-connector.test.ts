@@ -7,6 +7,7 @@ describe('PGClient', () => {
     database: 'postgres',
     user: 'postgres',
     password: 'postgres',
+    port: 5432,
   });
 
   const pg_client_mock = new Client({

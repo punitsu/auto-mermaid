@@ -46,7 +46,8 @@
     "commander": "^11.1.0",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.3",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "@types/commander": "^2.12.2",
