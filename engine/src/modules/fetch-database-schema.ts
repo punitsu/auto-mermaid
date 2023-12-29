@@ -7,6 +7,17 @@ import { parseDatabaseUrl, parseInputValues } from '@utils/helper';
 // Utilities
 import { FetchDatabaseSchemaInput, FetchPostgresSchemaInput } from '@utils/types/libs';
 
+export async function fetchDatabaseSchema(input: FetchDatabaseSchemaInput) {
+  const parsed_input = parseInputValues(input);
+  switch (parsed_input?.database_name) {
+    case 'postgres':
+      await fetchPostgresSchema(parsed_input);
+      break;
+    default:
+      throw new Error(`Database ${parsed_input?.database_name} not supported`);
+  }
+}
+
 export async function fetchPostgresSchema(input: FetchPostgresSchemaInput) {
   const { user, password, host, port, database } = parseDatabaseUrl(input?.connection_string, input?.database_name);
   const client = new PGClient({ user, password, host, port, database });
@@ -19,15 +30,4 @@ export async function fetchPostgresSchema(input: FetchPostgresSchemaInput) {
   `);
   await client.end();
   return rows;
-}
-
-export async function fetchDatabaseSchema(input: FetchDatabaseSchemaInput) {
-  const parsed_input = parseInputValues(input);
-  switch (parsed_input?.database_name) {
-    case 'postgres':
-      await fetchPostgresSchema(parsed_input);
-      break;
-    default:
-      throw new Error(`Database ${parsed_input?.database_name} not supported`);
-  }
 }
