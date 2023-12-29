@@ -39,7 +39,7 @@ describe('@utils/helper.js', () => {
     test('Case: Should throw error if regex doesnt match the expression', () => {
       expect(() => {
         parseDatabaseUrl('postgres://user:password@host:5432', 'postgres');
-      }).toThrowError('Invalid database URL for postgres');
+      }).toThrow('Invalid database URL for postgres');
     });
     test('Case: Should throw error if regex doesnt match the expression', () => {
       expect(() => {

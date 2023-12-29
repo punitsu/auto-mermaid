@@ -1,4 +1,7 @@
+// @ts-nocheck
+
 export class Client {
-  public connect() {}
-  public disconnect() {}
+  constructor(__) {}
+  public connect(__) {}
+  public disconnect(__) {}
 }
