@@ -1,5 +1,6 @@
 import { Client } from 'pg';
-import { PGClientProps } from '@utils/types/libs';
+
+import { PGClientProps } from '@utils/types';
 
 export class PGClient {
   client: Client;

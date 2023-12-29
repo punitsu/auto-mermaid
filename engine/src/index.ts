@@ -9,7 +9,7 @@ import { Command, Option } from 'commander';
 import { fetchDatabaseSchema } from '@modules/fetch-database-schema';
 
 // Utilities
-import { DATABASES_SUPPORTED } from '@utils/types/utils';
+import { DATABASES_SUPPORTED } from '@utils/types';
 
 const program = new Command();
 export const database_choices: DATABASES_SUPPORTED[] = ['postgres', 'mysql', 'sqlite'];

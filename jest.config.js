@@ -1,6 +1,7 @@
 module.exports = {
   roots: ['<rootDir>/engine/'],
   testMatch: ['**/__tests__/**/*.+(ts|tsx|js)', '**/?(*.)+(spec|test).+(ts|tsx|js)'],
+  collectCoverageFrom: ['!**/__mocks__/**/*.ts', '!**/__tests__/**/*.ts'],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },

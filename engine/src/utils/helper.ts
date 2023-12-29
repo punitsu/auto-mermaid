@@ -1,4 +1,4 @@
-import { DATABASES_SUPPORTED, ParseInputValuesInput } from './types/utils';
+import { DATABASES_SUPPORTED, ParseInputValuesInput } from '@utils/types';
 import { DATABASE_URL_REGEX } from '@utils/constants';
 
 export function parseInputValues(input: ParseInputValuesInput) {

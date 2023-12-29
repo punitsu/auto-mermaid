@@ -5,7 +5,7 @@ import { PGClient } from '@libs/pg-connector';
 import { parseDatabaseUrl, parseInputValues } from '@utils/helper';
 
 // Utilities
-import { FetchDatabaseSchemaInput, FetchPostgresSchemaInput } from '@utils/types/libs';
+import { FetchDatabaseSchemaInput, FetchPostgresSchemaInput } from '@utils/types';
 
 export async function fetchDatabaseSchema(input: FetchDatabaseSchemaInput) {
   const parsed_input = parseInputValues(input);

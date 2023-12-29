@@ -1,5 +1,4 @@
-import { Client } from 'pg';
-import { DATABASES_SUPPORTED } from '@utils/constants';
+export type DATABASES_SUPPORTED = 'postgres' | 'mysql' | 'sqlite';
 
 export interface PGClientProps {
   user?: string;
@@ -7,12 +6,6 @@ export interface PGClientProps {
   host?: string;
   database?: string;
   port?: number;
-}
-
-export interface PGClient {
-  client: Client;
-  connect: () => Promise<void>;
-  disconnect: () => Promise<void>;
 }
 
 export interface FetchDatabaseSchemaInput {
@@ -46,3 +39,5 @@ export interface FetchPostgresSchemaInput {
   exclude_enum_values: boolean;
   output_file_name: string;
 }
+
+export interface ParseInputValuesInput extends FetchDatabaseSchemaInput {}
