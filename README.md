@@ -10,7 +10,7 @@ npm install -g auto-mermaid
 ### Paths
 auto-mermaid provides a range of options to customize the ERD generation according to your needs.
 
-```html
+```angular2html
 Options:
 -v, --version                    Output the current version
 --debug                          show debug information (default: false)
