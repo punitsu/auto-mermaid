@@ -1,4 +1,5 @@
 CREATE DATABASE superstore;
+\c superstore;
 
 CREATE SCHEMA ecommerce;
 
@@ -40,7 +41,6 @@ CREATE TABLE IF NOT EXISTS ecommerce.order_item (
     unit_price DECIMAL(10, 2) NOT NULL
 );
 
-
 -- Relationships
 
 ALTER TABLE ecommerce.product ADD CONSTRAINT fk_product_category
@@ -58,3 +58,10 @@ ON DELETE CASCADE;
 ALTER TABLE ecommerce.order_item ADD CONSTRAINT fk_order_item_product
 FOREIGN KEY (product_id) REFERENCES ecommerce.product(id)
 ON DELETE SET NULL;
+
+-- Indexes
+
+CREATE INDEX idx_product_category ON ecommerce.product(category_id);
+CREATE INDEX idx_order_customer ON ecommerce.order(customer_id);
+CREATE INDEX idx_order_item_order ON ecommerce.order_item(order_id);
+CREATE INDEX idx_order_item_product ON ecommerce.order_item(product_id);
