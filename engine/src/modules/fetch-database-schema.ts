@@ -22,13 +22,15 @@ export async function fetchPostgresSchema(input: FetchPostgresSchemaInput) {
   const { user, password, host, port, database } = parseDatabaseUrl(input?.connection_string, input?.database_name);
   const client = new PGClient({ user, password, host, port, database });
   try {
-    logger.info(`Fetching schema`);
     const { rows } = await client.query(`
-      SELECT table_schema, table_name, column_name, data_type, is_nullable, column_default
-      FROM information_schema.columns
-      WHERE table_schema NOT IN ('information_schema', 'pg_catalog')
-      ORDER BY table_schema, table_name, ordinal_position;
+      SELECT * 
+      FROM information_schema.tables 
+      WHERE table_type = 'BASE TABLE' 
+      AND table_schema <> 'pg_catalog' 
+      AND table_schema <> 'information_schema' 
+      ORDER BY table_name;  
     `);
+    console.log(rows);
     return rows;
   } catch (error) {
     logger.error(`Error fetching schema: ${error}`);

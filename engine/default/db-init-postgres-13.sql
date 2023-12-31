@@ -1,67 +1,65 @@
-CREATE DATABASE superstore;
-\c superstore;
+CREATE DATABASE postgres_test_db;
+\c postgres_test_db;
 
-CREATE SCHEMA ecommerce;
+CREATE SCHEMA company;
 
--- Tables --
-
-CREATE TABLE IF NOT EXISTS ecommerce.category (
+CREATE TABLE IF NOT EXISTS company.department (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS ecommerce.product (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    category_id INTEGER,
-    price DECIMAL(10, 2) NOT NULL,
-    stock_quantity INTEGER NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS ecommerce.customer (
+CREATE TABLE IF NOT EXISTS company.employee (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    phone_number VARCHAR(15)
+    department_id INTEGER,
+    hire_date DATE NOT NULL,
+    salary DECIMAL(10, 2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS ecommerce.order (
+ALTER TABLE company.employee ADD CONSTRAINT fk_employee_department
+FOREIGN KEY (department_id) REFERENCES company.department(id)
+ON DELETE SET NULL;
+
+CREATE INDEX idx_employee_department ON company.employee(department_id);
+
+CREATE SCHEMA library;
+
+CREATE TABLE IF NOT EXISTS library.genre (
     id SERIAL PRIMARY KEY,
-    customer_id INTEGER,
-    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    total_amount DECIMAL(10, 2) NOT NULL
+    name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS ecommerce.order_item (
+CREATE TABLE IF NOT EXISTS library.book (
     id SERIAL PRIMARY KEY,
-    order_id INTEGER,
-    product_id INTEGER,
-    quantity INTEGER NOT NULL,
-    unit_price DECIMAL(10, 2) NOT NULL
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    genre_id INTEGER,
+    publication_year INTEGER
 );
 
--- Relationships
-
-ALTER TABLE ecommerce.product ADD CONSTRAINT fk_product_category
-FOREIGN KEY (category_id) REFERENCES ecommerce.category(id)
+ALTER TABLE library.book ADD CONSTRAINT fk_book_genre
+FOREIGN KEY (genre_id) REFERENCES library.genre(id)
 ON DELETE SET NULL;
 
-ALTER TABLE ecommerce.order ADD CONSTRAINT fk_order_customer
-FOREIGN KEY (customer_id) REFERENCES ecommerce.customer(id)
+CREATE INDEX idx_book_genre ON library.book(genre_id);
+
+CREATE SCHEMA events;
+
+CREATE TABLE IF NOT EXISTS events.event_type (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS events.event (
+    id SERIAL PRIMARY KEY,
+    event_type_id INTEGER,
+    event_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    location VARCHAR(255) NOT NULL
+);
+
+ALTER TABLE events.event ADD CONSTRAINT fk_event_event_type
+FOREIGN KEY (event_type_id) REFERENCES events.event_type(id)
 ON DELETE SET NULL;
 
-ALTER TABLE ecommerce.order_item ADD CONSTRAINT fk_order_item_order
-FOREIGN KEY (order_id) REFERENCES ecommerce.order(id)
-ON DELETE CASCADE;
-
-ALTER TABLE ecommerce.order_item ADD CONSTRAINT fk_order_item_product
-FOREIGN KEY (product_id) REFERENCES ecommerce.product(id)
-ON DELETE SET NULL;
-
--- Indexes
-
-CREATE INDEX idx_product_category ON ecommerce.product(category_id);
-CREATE INDEX idx_order_customer ON ecommerce.order(customer_id);
-CREATE INDEX idx_order_item_order ON ecommerce.order_item(order_id);
-CREATE INDEX idx_order_item_product ON ecommerce.order_item(product_id);
+CREATE INDEX idx_event_event_type ON events.event(event_type_id);

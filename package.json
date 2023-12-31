@@ -8,7 +8,8 @@
     "test": "jest --coverage ",
     "lint": "eslint src/**/*.ts --fix",
     "start": "nodemon --watch \"*.ts\"  --watch \"*.json\" --exec \"ts-node\" ./engine/src/index.ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:postgres": "ts-node ./engine/src/index.ts -d postgres -c postgres://postgres:postgres@localhost:5432/postgres_test_db --debug true"
   },
   "husky": {
     "hooks": {
